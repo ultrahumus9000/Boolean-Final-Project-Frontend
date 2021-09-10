@@ -88,6 +88,7 @@ type Store = {
   getBookingsForHost: () => void;
   getBookingsForGuest: () => void;
   deleteBooking: (arg: number) => void;
+  addReview: (arg: string, arg2: number) => void;
 };
 
 const useStore = create<Store>((set, get) => ({
@@ -243,6 +244,20 @@ const useStore = create<Store>((set, get) => ({
         );
         set({ bookings: filteredBookings });
       })
+      .catch((error) => {
+        throw error;
+      });
+  },
+  addReview: (content, houseId) => {
+    fetch(`${baseUrl}/reviews`, {
+      method: "POST",
+      credentials: "include",
+      headers: { "Content-type": "application/json" },
+      // body: JSON.stringify({"content": review, "houseId": houseId}),
+      body: JSON.stringify({ content, houseId }),
+    })
+      .then((resp) => resp.json())
+      .then((newReview) => console.log("newReview made", newReview))
       .catch((error) => {
         throw error;
       });
