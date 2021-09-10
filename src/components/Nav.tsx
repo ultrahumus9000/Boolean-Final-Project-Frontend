@@ -13,7 +13,7 @@ export default function Nav() {
   console.log(currentUser);
 
   function logout() {
-    fetch("http://localhost:4000/logout", {
+    fetch("https://hotelable.herokuapp.com/logout", {
       credentials: "include",
     }).then(() => {
       setCurrentUser({

@@ -1,7 +1,7 @@
 import { SyntheticEvent } from "react";
 import create from "zustand";
 
-let baseUrl = "http://localhost:4000";
+let baseUrl = "https://hotelable.herokuapp.com";
 
 type User = {
   username: string;
@@ -195,7 +195,7 @@ const useStore = create<Store>((set, get) => ({
       });
   },
   getValidateCurrToken: () => {
-    fetch("http://localhost:4000/token", {
+    fetch("https://hotelable.herokuapp.com/token", {
       credentials: "include",
     })
       .then((resp) => resp.json())
@@ -205,7 +205,7 @@ const useStore = create<Store>((set, get) => ({
   },
 
   getBookingsForHost: () => {
-    fetch("http://localhost:4000/bookings/host", {
+    fetch("https://hotelable.herokuapp.com/bookings/host", {
       credentials: "include",
     })
       .then((resp) => resp.json())
@@ -217,7 +217,7 @@ const useStore = create<Store>((set, get) => ({
       });
   },
   getBookingsForGuest: () => {
-    fetch("http://localhost:4000/bookings/guest", {
+    fetch("https://hotelable.herokuapp.com/bookings/guest", {
       credentials: "include",
     })
       .then((resp) => resp.json())

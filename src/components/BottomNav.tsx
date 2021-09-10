@@ -12,7 +12,7 @@ export default function BottomNav() {
   const history = useHistory();
 
   function switchToHost() {
-    fetch("http://localhost:4000/guests/switch", {
+    fetch("https://hotelable.herokuapp.com/guests/switch", {
       credentials: "include",
     })
       .then((resp) => resp.json())
@@ -27,7 +27,7 @@ export default function BottomNav() {
   }
 
   function switchToGuest() {
-    fetch("http://localhost:4000/hosts/switch", {
+    fetch("https://hotelable.herokuapp.com/hosts/switch", {
       credentials: "include",
     })
       .then((resp) => resp.json())
