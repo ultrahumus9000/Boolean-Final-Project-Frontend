@@ -65,7 +65,7 @@ export default function AddListingHost() {
     setNewListing({ ...newListing, pictures: [...uploadedFiles] });
     setPicturesArray([...uploadedFiles]);
 
-    console.log("setPicturesArray", [...uploadedFiles]);
+    // console.log("setPicturesArray", [...uploadedFiles]);
   }
 
   function handleSubmit(e: SyntheticEvent) {
