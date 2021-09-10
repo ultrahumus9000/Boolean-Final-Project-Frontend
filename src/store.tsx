@@ -131,6 +131,7 @@ const useStore = create<Store>((set, get) => ({
     fetch(`${baseUrl}/houses`)
       .then((resp) => resp.json())
       .then((allHouses) => {
+        console.log("i am fetching");
         set({ houses: allHouses });
       })
       .catch((error) => {
