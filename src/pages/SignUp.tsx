@@ -38,7 +38,7 @@ export default function RegisterPage() {
       loginData = { ...loginData, hostRole: "host" };
     }
 
-    fetch("https://hotelable.herokuapp.com/users", {
+    fetch("http://localhost:4000/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

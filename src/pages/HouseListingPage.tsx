@@ -69,7 +69,7 @@ export default function HouseListingPage() {
       console.log(currentUser);
       history.push("/login");
       function logout() {
-        fetch("https://hotelable.herokuapp.com/logout", {
+        fetch("http://localhost:4000/logout", {
           credentials: "include",
         }).then(() => {
           setCurrentUser({

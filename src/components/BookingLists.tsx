@@ -58,7 +58,7 @@ export default function BookingList({ bookings }) {
               <img
                 src={booking.pictureSrc}
                 onClick={() => {
-                  history.push(`/house/${booking.house.id}`);
+                  history.push(`/house/${booking.houseId}`);
                 }}
               ></img>
               <div className="stay-details">

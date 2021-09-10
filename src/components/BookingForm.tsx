@@ -39,7 +39,7 @@ export default function BookingForm({ house }) {
     }
   }
   function createBooking(booking) {
-    fetch(`https://hotelable.herokuapp.com/bookings`, {
+    fetch(`http://localhost:4000/bookings`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
