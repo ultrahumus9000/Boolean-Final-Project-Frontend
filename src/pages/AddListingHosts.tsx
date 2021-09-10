@@ -3,10 +3,11 @@ import Facility from "../components/Facility";
 import { useHistory } from "react-router";
 import useStore from "../store";
 
-export default function AddListingHost() {
+export default function AddListingHosts() {
   const currentUser = useStore((state) => state.currentUser);
   const addNewListing = useStore((state) => state.addNewListing);
   console.log("current", currentUser);
+  //hhhhh
   const initialHouseData = {
     name: "",
     city: "",

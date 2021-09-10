@@ -12,7 +12,7 @@ import RegisterPage from "./pages/SignUp";
 import GuestProfilePage from "./pages/GuestProfilePage";
 import BottomNav from "./components/BottomNav";
 import useStore from "./store";
-import AddListingHost from "./pages/AddListingHost";
+import AddListingHosts from "./pages/AddListingHosts";
 import LoadingPage from "./pages/LoadingPage";
 
 function App() {
@@ -58,7 +58,7 @@ function App() {
               </Route>
               <Route path="/host/dashboard/addlisting" exact>
                 {currentUser.role === "host" ? (
-                  <AddListingHost />
+                  <AddListingHosts />
                 ) : (
                   <LoadingPage />
                 )}
