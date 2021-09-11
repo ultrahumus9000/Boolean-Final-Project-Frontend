@@ -34,10 +34,25 @@ export default function RegisterPage() {
     };
     if (form.radio.value === "guest") {
       loginData = { ...loginData, guestRole: "guest" };
+
+      if (loginData.avatar === "") {
+        loginData = {
+          ...loginData,
+          avatar:
+            "https://images.pexels.com/photos/3565370/pexels-photo-3565370.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+        };
+      }
     } else {
       loginData = { ...loginData, hostRole: "host" };
+      if (loginData.avatar === "") {
+        loginData = {
+          ...loginData,
+          avatar:
+            "https://images.pexels.com/photos/2648203/pexels-photo-2648203.jpeg?auto=compress&cs=tinysrgb&dpr=2&w=500",
+        };
+      }
     }
-
+    console.log(loginData);
     fetch("http://localhost:4000/users", {
       method: "POST",
       headers: {

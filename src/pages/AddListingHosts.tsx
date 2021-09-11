@@ -3,11 +3,10 @@ import Facility from "../components/Facility";
 import { useHistory } from "react-router";
 import useStore from "../store";
 
-export default function AddListingHosts() {
+export default function AddListingHost() {
   const currentUser = useStore((state) => state.currentUser);
   const addNewListing = useStore((state) => state.addNewListing);
   console.log("current", currentUser);
-  //hhhhh
   const initialHouseData = {
     name: "",
     city: "",
@@ -66,13 +65,12 @@ export default function AddListingHosts() {
     setNewListing({ ...newListing, pictures: [...uploadedFiles] });
     setPicturesArray([...uploadedFiles]);
 
-    // console.log("setPicturesArray", [...uploadedFiles]);
+    console.log("setPicturesArray", [...uploadedFiles]);
   }
 
   function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
     addNewListing(e, newListing);
-    history.push("/host/dashboard");
   }
 
   function cancel(e) {
@@ -162,7 +160,7 @@ export default function AddListingHosts() {
           />
         </label>
         {/* <span className="validity"></span> adds tick to validate?? */}
-        <input className="submitBtn" type="submit" value="Add listing" />
+        <input className="book-btn" type="submit" value="Add listing" />
         <a className="cancelLink" onClick={cancel}>
           Cancel Listing
         </a>
