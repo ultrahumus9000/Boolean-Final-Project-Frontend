@@ -20,6 +20,7 @@ export default function Listings() {
   }, [housesForHost.length]);
 
   const deleteHouse = (id) => {
+    console.log("houseid", id);
     fetch(`http://localhost:4000/houses/${id}`, {
       method: "DELETE",
       credentials: "include",
@@ -34,7 +35,7 @@ export default function Listings() {
         throw error;
       });
   };
-  console.log(housesForHost);
+
   return (
     <>
       {housesForHost.length && (
@@ -71,6 +72,7 @@ export default function Listings() {
                       color="secondary"
                       href="#contained-buttons"
                       onClick={() => {
+                        console.log("house", house.id);
                         deleteHouse(house.id);
                       }}
                     >

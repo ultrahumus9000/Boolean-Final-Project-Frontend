@@ -18,20 +18,18 @@ export default function AddListingHost() {
   };
 
   const facilitiesList = {
-    bedroom: "Bedroom",
-    maxGuests: "MaxGuests",
-    balcony: "Balcony",
-    bathtub: "Bathtub",
-    bidet: "Bidet",
-    garden: "Garden",
-    jacuzzi: "Jacuzzi",
-    kitchen: "Kitchen",
-    parking: "Parking",
-    shower: "Shower",
-    spa: "Spa",
-    swimmingPool: "SwimmingPool",
-    tv: "TV",
-    wifi: "WiFi",
+    Balcony: "Balcony",
+    Bathtub: "Bathtub",
+    Bidet: "Bidet",
+    Garden: "Garden",
+    Jacuzzi: "Jacuzzi",
+    Kitchen: "Kitchen",
+    Parking: "Parking",
+    Shower: "Shower",
+    Spa: "Spa",
+    SwimmingPool: "SwimmingPool",
+    TV: "TV",
+    Wifi: "WiFi",
   };
 
   const [picturesArray, setPicturesArray] = useState([]);
