@@ -22,6 +22,7 @@ import Wifi from "../assets/Wifi.svg";
 import SingleReview from "../components/Review";
 import HouseBasicInfo from "../components/HouseBasicInfo";
 import BookingForm from "../components/BookingForm";
+import EditHouseForm from "../components/EditHouseForm";
 
 type HouseIdType = {
   houseId: string;
@@ -46,12 +47,13 @@ export default function HouseListingPage() {
   const history = useHistory();
   const houseId: HouseIdType = useParams();
   const realHouseId = Number(houseId.houseId);
-  const setCurrentUser = useStore((store) => store.setCurrentUser);
   const house = useStore((store) => store.house);
   const fetchOneHouse = useStore((store) => store.fetchOneHouse);
   const currentUser = useStore((store) => store.currentUser);
   const bookingDisplay = useStore((store) => store.bookingDisplay);
   const toggleBookingDisplay = useStore((store) => store.toggleDisplay);
+  const displayEditHouse = useStore((store) => store.displayHouseEdit);
+
   useEffect(() => {
     fetchOneHouse(realHouseId);
   }, [realHouseId]);
@@ -66,72 +68,99 @@ export default function HouseListingPage() {
     } else if (currentUser.role === "host") {
       alert("you have to login as a guest then you can book this house");
     } else {
-      console.log(currentUser);
       history.push("/login");
-      function logout() {
-        fetch("http://localhost:4000/logout", {
-          credentials: "include",
-        }).then(() => {
-          setCurrentUser({
-            username: "",
-            firstName: "",
-            lastName: "",
-            email: "",
-            avatar: "",
-            role: "",
-          });
-          history.push("/");
-        });
-      }
     }
   }
 
   return (
-    <div className="house-card">
-      <HouseBasicInfo house={house} />
-
-      <section className="pictures-section">
-        <Swiper
-          modules={[Navigation, Pagination, Scrollbar]}
-          spaceBetween={-0.5}
-          slidesPerView={1}
-          navigation
-          pagination
-        >
-          {house.pictures.map((picture) => {
-            return (
-              <SwiperSlide key={picture.alt}>
-                <img src={picture.src} alt={picture.alt} />
-              </SwiperSlide>
-            );
-          })}
-        </Swiper>
-      </section>
-      <p className="facility-p"> Provided Facilities</p>
-      <section className="facility-section">
-        {house.facility.map((facility) => {
-          return (
-            <p className="facility" key={facility}>
-              <img className="facility-icon" src={imageObj[facility]} />
-              <span>{facility}</span>
-            </p>
-          );
-        })}
-      </section>
-      {bookingDisplay ? (
-        <BookingForm house={house} />
+    <div>
+      {displayEditHouse ? (
+        <EditHouseForm />
       ) : (
-        <button className="book-btn" onClick={bookAction}>
-          Book Today
-        </button>
-      )}
+        <div className="house-listing-page">
+          <HouseBasicInfo house={house} />
 
-      <p>Check our reviews</p>
-      <section className="review-section">
-        {house.reviews.map((review) => {
-          return <SingleReview review={review} key={review.guestUsername} />;
-        })}
-      </section>
+          <section className="pictures-section">
+            <Swiper
+              modules={[Navigation, Pagination, Scrollbar]}
+              spaceBetween={0}
+              slidesPerView={1}
+              navigation
+              pagination
+            >
+              {house.pictures.map((picture) => {
+                return (
+                  <SwiperSlide key={picture.alt}>
+                    <img src={picture.src} alt={picture.alt} />
+                  </SwiperSlide>
+                );
+              })}
+            </Swiper>
+          </section>
+          <p className="facility-p"> Provided Facilities</p>
+          <section className="facility-section">
+            {house.facility.map((facility) => {
+              return (
+                <p className="facility" key={facility}>
+                  <img className="facility-icon" src={imageObj[facility]} />
+                  <span>{facility}</span>
+                </p>
+              );
+            })}
+          </section>
+          {bookingDisplay ? (
+            <BookingForm house={house} />
+          ) : (
+            <div className="house-card">
+              <HouseBasicInfo house={house} />
+              <section className="pictures-section">
+                <Swiper
+                  modules={[Navigation, Pagination, Scrollbar]}
+                  spaceBetween={-0.5}
+                  slidesPerView={1}
+                  navigation
+                  pagination
+                >
+                  {house.pictures.map((picture) => {
+                    return (
+                      <SwiperSlide key={picture.alt}>
+                        <img src={picture.src} alt={picture.alt} />
+                      </SwiperSlide>
+                    );
+                  })}
+                </Swiper>
+              </section>
+              <p className="facility-p"> Provided Facilities</p>
+              <section className="facility-section">
+                {house.facility.map((facility) => {
+                  return (
+                    <p className="facility" key={facility}>
+                      <img className="facility-icon" src={imageObj[facility]} />
+                      <span>{facility}</span>
+                    </p>
+                  );
+                })}
+              </section>
+              {bookingDisplay ? (
+                <BookingForm house={house} />
+              ) : (
+                <button className="book-btn" onClick={bookAction}>
+                  Book Today
+                </button>
+              )}
+
+              <p>Check our reviews</p>
+              <section className="review-section">
+                {house.reviews.map((review) => {
+                  return (
+                    <SingleReview review={review} key={review.guestUsername} />
+                  );
+                })}
+              </section>
+            </div>
+          )}
+        </div>
+      )}
     </div>
   );
 }
