@@ -28,7 +28,7 @@ export default function EditHouseForm() {
   const [houseForm, setHouseForm] = useState(house);
   const history = useHistory();
 
-  console.log("line 31", houseForm);
+  // console.log("line 31", houseForm);
 
   function handleChange(e) {
     console.log("handlechange", e.target.value);
@@ -47,11 +47,20 @@ export default function EditHouseForm() {
     setHouseForm({ ...houseForm, [e.target.name]: updatedArray });
   }
 
-  function deletePicture(e) {
-    const picuture = e.target;
-    // setHouseForm({ ...houseForm, pictures: [...uploadedFiles] });
+  function addPicture() {}
 
-    console.log("setPicturesArray", picuture);
+  function deletePicture(id: number) {
+    // picture deleted in the state first, if cancel it we have to put it back
+    // if there is only one picture left, we cannot delete
+    if (houseForm.pictures.length === 1) {
+      alert("you have to have a default picture");
+      return;
+    }
+
+    const updatedPictures = houseForm.pictures.filter(
+      (picture) => picture.id !== id
+    );
+    setHouseForm({ ...houseForm, pictures: updatedPictures });
   }
 
   function handleSubmit(e: SyntheticEvent) {
@@ -111,7 +120,14 @@ export default function EditHouseForm() {
             return (
               <div>
                 <img className="editform-img" src={picture.src} />
-                <button onClick={() => {}}> delete </button>
+                <button
+                  onClick={() => {
+                    deletePicture(picture.id);
+                  }}
+                >
+                  {" "}
+                  delete{" "}
+                </button>
               </div>
             );
           })}

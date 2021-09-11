@@ -13,6 +13,7 @@ type User = {
 };
 
 type Picture = {
+  id: number;
   src: string;
   alt: string;
 };
