@@ -114,7 +114,18 @@ p {
   justify-self: center;
 }
 
-.doorHanger {
+.spinner {
+  width: 100%;
+  transition: 0.2s;
+  animation: mymove 1s infinite;
+}
+@keyframes mymove {
+  50% {
+    transform: rotate(180deg);
+  }
+}
+
+/* .doorHanger {
   opacity: 10%;
   width: 100%;
   margin-bottom: 20px;
@@ -124,7 +135,7 @@ p {
   50% {
     transform: rotate(30deg);
   }
-}
+} */
 
 /* NAV */
 

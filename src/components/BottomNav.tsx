@@ -42,7 +42,7 @@ export default function BottomNav() {
   }
 
   return (
-    <div className="bottom-nav">
+    <div className={currentUser.role ? "bottom-nav-guest" : "bottom-nav"}>
       <Link to="/">
         <img src={hotel}></img>
       </Link>
@@ -63,10 +63,10 @@ export default function BottomNav() {
         </Button>
       )}
       {currentUser.role === "host" && (
-        <Button onClick={switchToGuest} variant="contained" color="secondary">
+        <button className="logBtn" onClick={switchToGuest}>
           {" "}
           Switch to guest
-        </Button>
+        </button>
       )}
     </div>
   );
