@@ -40,17 +40,23 @@ export default function Filter() {
 
   return (
     <>
+      <h1>Choose a stay...</h1>
       <form className="filter" onSubmit={handleSubmit}>
-        <input
-          type="search"
-          name="city"
-          placeholder="Where to?"
-          onChange={handleChange}
-          value={filterOptions.city}
-        />
+        <label>
+          Where to?
+          <input
+            className="searchfield"
+            type="search"
+            name="city"
+            placeholder="Anywhere"
+            onChange={handleChange}
+            value={filterOptions.city}
+          />
+        </label>
         <label>
           Guests
           <input
+            className="numfield"
             type="number"
             name="maxGuests"
             value={filterOptions.maxGuests}
@@ -58,9 +64,11 @@ export default function Filter() {
             onChange={handleChange}
           />
         </label>
+
         <label>
           Check In
           <input
+            className="datefield"
             id="checkInCal"
             type="date"
             name="checkIn"
@@ -69,9 +77,11 @@ export default function Filter() {
             onChange={handleChange}
           />
         </label>
+
         <label>
           Check Out
           <input
+            className="datefield"
             type="date"
             name="checkOut"
             value={filterOptions.checkOut}
@@ -79,8 +89,9 @@ export default function Filter() {
             onChange={handleChange}
           />
         </label>
-        <input type="submit" value="Search" />
-        <button type="button" onClick={clearForm}>
+
+        <input className="submitBtn" type="submit" value="Search" />
+        <button className="clearBtn " type="button" onClick={clearForm}>
           Reset
         </button>
       </form>

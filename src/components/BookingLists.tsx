@@ -16,7 +16,7 @@ export default function BookingList({ bookings }) {
     setAddReviewStatus(!addReviewStatus);
   }
 
-  console.log("booking", bookings);
+  // console.log("booking", bookings)
 
   return (
     <>
@@ -70,7 +70,12 @@ export default function BookingList({ bookings }) {
                 </div>
                 {toggleBooking === "future" ? (
                   <div className="contact-host">
-                    <Button> Contact Host</Button>
+                    <Button
+                      onClick={() => prompt("Send an email to the host:")}
+                    >
+                      {" "}
+                      Contact Host
+                    </Button>
                     <button
                       onClick={() => {
                         deleteBooking(booking.bookingId);
