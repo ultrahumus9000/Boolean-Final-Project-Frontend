@@ -68,6 +68,7 @@ export default function AddListingHost() {
 
   function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
+    console.log(newListing);
     addNewListing(e, newListing);
   }
 

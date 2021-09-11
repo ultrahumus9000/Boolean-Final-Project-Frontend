@@ -1,5 +1,5 @@
 import React from "react";
-// import spinner from "../assets/spinner.png";
+import spinner from "../assets/spinner.png";
 
 export default function Profile() {
   return (
@@ -7,7 +7,7 @@ export default function Profile() {
       <div className="loader">
         <p> Loading content... </p>
         <br></br>
-        {/* <img className="spinner" src={spinner} alt="Loading" /> */}
+        <img className="spinner" src={spinner} alt="Loading" />
       </div>
     </div>
   );

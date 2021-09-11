@@ -181,9 +181,6 @@ const useStore = create<Store>((set, get) => ({
   // 'npm i --save multer' in backend to accept new file type
   addNewListing: (e, housedata) => {
     const formDataObj = new FormData(e.target as HTMLFormElement);
-    formDataObj.append("facility", JSON.stringify(housedata.facility));
-
-    console.log("housedata", housedata);
     console.log("formDataObj", formDataObj.get("pictures"));
 
     fetch(`${baseUrl}/houses`, {
