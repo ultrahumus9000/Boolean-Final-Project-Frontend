@@ -78,36 +78,6 @@ export default function HouseListingPage() {
         <EditHouseForm />
       ) : (
         <div className="house-listing-page">
-          <HouseBasicInfo house={house} />
-
-          <section className="pictures-section">
-            <Swiper
-              modules={[Navigation, Pagination, Scrollbar]}
-              spaceBetween={0}
-              slidesPerView={1}
-              navigation
-              pagination
-            >
-              {house.pictures.map((picture) => {
-                return (
-                  <SwiperSlide key={picture.alt}>
-                    <img src={picture.src} alt={picture.alt} />
-                  </SwiperSlide>
-                );
-              })}
-            </Swiper>
-          </section>
-          <p className="facility-p"> Provided Facilities</p>
-          <section className="facility-section">
-            {house.facility.map((facility) => {
-              return (
-                <p className="facility" key={facility}>
-                  <img className="facility-icon" src={imageObj[facility]} />
-                  <span>{facility}</span>
-                </p>
-              );
-            })}
-          </section>
           {bookingDisplay ? (
             <BookingForm house={house} />
           ) : (

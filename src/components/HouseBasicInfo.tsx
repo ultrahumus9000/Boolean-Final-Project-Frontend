@@ -7,12 +7,15 @@ type HouseBioProp = {
 
 export default function HouseBasicInfo({ house }: HouseBioProp) {
   const currentUser = useStore((store) => store.currentUser);
-  console.log(house);
+  const toggleEditHouse = useStore((store) => store.toggleDisplayHouseEdit);
+
   return (
     <section className="house-bio">
       <div className="edit-section">
         <h2>{house.name}</h2>
-        {house.hostProfile === currentUser.username && <button>Edit</button>}
+        {house.hostProfile === currentUser.username && (
+          <button onClick={toggleEditHouse}>Edit</button>
+        )}
       </div>
 
       <section className="basic-section">
