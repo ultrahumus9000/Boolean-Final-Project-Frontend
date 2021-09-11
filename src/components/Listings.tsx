@@ -6,6 +6,7 @@ import useStore from "../store";
 
 export default function Listings() {
   const [housesForHost, setHousesForHost] = useState([]);
+  const toggleEditHouse = useStore((store) => store.toggleDisplayHouseEdit);
   const houses = useStore((store) => store.houses);
   const history = useHistory();
 
@@ -15,7 +16,6 @@ export default function Listings() {
     })
       .then((res) => res.json())
       .then((houses) => {
-        console.log("i am listing");
         setHousesForHost(houses);
       });
   }, []);
@@ -43,7 +43,7 @@ export default function Listings() {
         <div>
           {housesForHost.map((house) => {
             return (
-              <div className="listing-container">
+              <div className="listing-container" key={house.name}>
                 <img
                   className="house-img"
                   src={house.pictures}
@@ -64,6 +64,10 @@ export default function Listings() {
                       variant="contained"
                       color="primary"
                       href="#contained-buttons"
+                      onClick={() => {
+                        toggleEditHouse();
+                        history.push(`/house/${house.id}`);
+                      }}
                     >
                       {" "}
                       Edit
@@ -73,7 +77,6 @@ export default function Listings() {
                       color="secondary"
                       href="#contained-buttons"
                       onClick={() => {
-                        console.log("house", house.id);
                         deleteHouse(house.id);
                       }}
                     >
