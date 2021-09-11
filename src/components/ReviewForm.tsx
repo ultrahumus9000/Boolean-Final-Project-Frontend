@@ -5,7 +5,7 @@ export default function ReviewForm({ houseId, toggleReview }) {
   const [review, setReview] = useState("");
   const addReview = useStore((state) => state.addReview);
   const currentUser = useStore((state) => state.currentUser);
-
+  console.log(houseId);
   function handleChange(e) {
     setReview(e.target.value);
   }

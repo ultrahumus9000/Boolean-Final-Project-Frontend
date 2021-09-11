@@ -80,7 +80,10 @@ export default function BookingList({ bookings }) {
                     </button>
                   </div>
                 ) : addReviewStatus ? (
-                  <ReviewForm toggleReview={toggleReview} />
+                  <ReviewForm
+                    houseId={booking.houseId}
+                    toggleReview={toggleReview}
+                  />
                 ) : (
                   <Button
                     variant="contained"

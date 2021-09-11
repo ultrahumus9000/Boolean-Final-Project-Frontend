@@ -72,6 +72,7 @@ export default function AddListingHosts() {
   function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
     addNewListing(e, newListing);
+    history.push("/host/dashboard");
   }
 
   function cancel(e) {
