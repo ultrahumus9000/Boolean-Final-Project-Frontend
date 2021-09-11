@@ -68,8 +68,11 @@ export default function AddListingHost() {
 
   function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
-    console.log(newListing);
     addNewListing(e, newListing);
+    // need to set this cuz the database react too slow so that you can see newest changes in your frontend
+    setTimeout(() => {
+      history.push("/host/dashboard");
+    }, 1500);
   }
 
   function cancel(e) {

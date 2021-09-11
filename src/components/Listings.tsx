@@ -9,15 +9,19 @@ export default function Listings() {
   const houses = useStore((store) => store.houses);
   const history = useHistory();
 
+  console.log("i am in listing");
+
   useEffect(() => {
     fetch("http://localhost:4000/hosts/houses", {
       credentials: "include",
     })
       .then((res) => res.json())
       .then((houses) => {
+        console.log("houses", houses);
+        console.log("i am working");
         setHousesForHost(houses);
       });
-  }, [housesForHost.length]);
+  }, []);
 
   const deleteHouse = (id) => {
     console.log("houseid", id);
