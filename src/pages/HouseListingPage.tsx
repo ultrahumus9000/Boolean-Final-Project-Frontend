@@ -78,57 +78,53 @@ export default function HouseListingPage() {
         <EditHouseForm />
       ) : (
         <div className="house-listing-page">
-          {bookingDisplay ? (
-            <BookingForm house={house} />
-          ) : (
-            <div className="house-card">
-              <HouseBasicInfo house={house} />
-              <section className="pictures-section">
-                <Swiper
-                  modules={[Navigation, Pagination, Scrollbar]}
-                  spaceBetween={-0.5}
-                  slidesPerView={1}
-                  navigation
-                  pagination
-                >
-                  {house.pictures.map((picture) => {
-                    return (
-                      <SwiperSlide key={picture.alt}>
-                        <img src={picture.src} alt={picture.alt} />
-                      </SwiperSlide>
-                    );
-                  })}
-                </Swiper>
-              </section>
-              <p className="facility-p"> Provided Facilities</p>
-              <section className="facility-section">
-                {house.facility.map((facility) => {
+          <div className="house-card">
+            <HouseBasicInfo house={house} />
+            <section className="pictures-section">
+              <Swiper
+                modules={[Navigation, Pagination, Scrollbar]}
+                spaceBetween={-0.5}
+                slidesPerView={1}
+                navigation
+                pagination
+              >
+                {house.pictures.map((picture) => {
                   return (
-                    <p className="facility" key={facility}>
-                      <img className="facility-icon" src={imageObj[facility]} />
-                      <span>{facility}</span>
-                    </p>
+                    <SwiperSlide key={picture.alt}>
+                      <img src={picture.src} alt={picture.alt} />
+                    </SwiperSlide>
                   );
                 })}
-              </section>
-              {bookingDisplay ? (
-                <BookingForm house={house} />
-              ) : (
-                <button className="book-btn" onClick={bookAction}>
-                  Book Today
-                </button>
-              )}
+              </Swiper>
+            </section>
+            <p className="facility-p"> Provided Facilities</p>
+            <section className="facility-section">
+              {house.facility.map((facility) => {
+                return (
+                  <p className="facility" key={facility}>
+                    <img className="facility-icon" src={imageObj[facility]} />
+                    <span>{facility}</span>
+                  </p>
+                );
+              })}
+            </section>
+            {bookingDisplay ? (
+              <BookingForm house={house} />
+            ) : (
+              <button className="book-btn" onClick={bookAction}>
+                Book Today
+              </button>
+            )}
 
-              <p>Check our reviews</p>
-              <section className="review-section">
-                {house.reviews.map((review) => {
-                  return (
-                    <SingleReview review={review} key={review.guestUsername} />
-                  );
-                })}
-              </section>
-            </div>
-          )}
+            <p>Check our reviews</p>
+            <section className="review-section">
+              {house.reviews.map((review) => {
+                return (
+                  <SingleReview review={review} key={review.guestUsername} />
+                );
+              })}
+            </section>
+          </div>
         </div>
       )}
     </div>

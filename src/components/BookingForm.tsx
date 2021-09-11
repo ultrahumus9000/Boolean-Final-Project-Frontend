@@ -20,24 +20,12 @@ export default function BookingForm({ house }) {
   const [bookingForm, setBookingForm] = useState(initialBookingForm);
   const toggleDisplay = useStore((store) => store.toggleDisplay);
   const currentUser = useStore((store) => store.currentUser);
+  const [bookConfirm, setBookConfirm] = useState(false);
   const history = useHistory();
 
-  function calculateTotal() {
-    var date1 = new Date(bookingForm.start);
-    console.log("bookingForm end in line 29", bookingForm.end);
-    var date2 = new Date(bookingForm.end);
+  const today = new Date().toISOString();
+  const shortDate = today.substring(0, 10);
 
-    // To calculate the time difference of two dates
-    var Difference_In_Time = date2.getTime() - date1.getTime();
-
-    // To calculate the no. of days between two dates
-    var Difference_In_Days = Difference_In_Time / (1000 * 3600 * 24);
-
-    const totalPrice = house.price * Difference_In_Days;
-    if (bookingForm.start !== "" && bookingForm.end !== "") {
-      setBookingForm({ ...bookingForm, total: totalPrice });
-    }
-  }
   function createBooking(booking) {
     fetch(`http://localhost:4000/bookings`, {
       method: "POST",
@@ -55,9 +43,14 @@ export default function BookingForm({ house }) {
         } else if (currentUser.username === "") {
           history.push("/login");
         } else {
-          toggleDisplay();
           setBookingForm(initialBookingForm);
-          history.push("/guest/dashboard");
+          setBookConfirm(true);
+          setTimeout(() => {
+            setBookConfirm(false);
+          }, 2000);
+          setTimeout(() => {
+            toggleDisplay();
+          }, 2500);
         }
       })
       .catch((error) => {
@@ -128,28 +121,33 @@ export default function BookingForm({ house }) {
 
   return (
     <section className="booking-form">
-      <form onSubmit={handleSubmit}>
-        <label>Check In </label>
-        <input
-          type="date"
-          name="start"
-          value={bookingForm.start}
-          onChange={handleStart}
-          required
-        />
-        <label>Check Out </label>
-        <input
-          type="date"
-          name="end"
-          required
-          value={bookingForm.end}
-          onChange={(event) => {
-            handleEndDate(event);
-          }}
-        />
-        <p> Total:{bookingForm.total} </p>
-        <button>Submit</button>
-      </form>
+      {bookConfirm ? (
+        <p className="voyage">Bon Voyage!</p>
+      ) : (
+        <form onSubmit={handleSubmit}>
+          <label>Check In </label>
+          <input
+            type="date"
+            name="start"
+            min={shortDate}
+            value={bookingForm.start}
+            onChange={handleStart}
+            required
+          />
+          <label>Check Out </label>
+          <input
+            type="date"
+            name="end"
+            required
+            value={bookingForm.end}
+            onChange={(event) => {
+              handleEndDate(event);
+            }}
+          />
+          <p> Total:{bookingForm.total} </p>
+          <button>Submit</button>
+        </form>
+      )}
     </section>
   );
 }
