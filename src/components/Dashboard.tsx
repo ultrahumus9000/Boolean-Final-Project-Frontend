@@ -24,33 +24,28 @@ export default function Dashboard() {
   }
 
   function deleteAccount() {
-    if (currentUser.role === "guest") {
-      fetch(`http://localhost:4000/guests`, {
-        method: "DELETE",
-        credentials: "include",
-      });
-    } else {
-      fetch(`http://localhost:4000/hosts`, {
-        method: "DELETE",
-        credentials: "include",
-      });
-    }
-    alert("you are successfully deleted");
-    setTimeout(() => {
-      fetch("http://localhost:4000/logout", {
-        credentials: "include",
-      }).then(() => {
-        setCurrentUser({
-          username: "",
-          firstName: "",
-          lastName: "",
-          email: "",
-          avatar: "",
-          role: "",
+    // delete the account completely for now which i shouldnt
+    fetch(`http://localhost:4000/users`, {
+      method: "DELETE",
+      credentials: "include",
+    }).then(() => {
+      alert("you are successfully deleted");
+      setTimeout(() => {
+        fetch("http://localhost:4000/logout", {
+          credentials: "include",
+        }).then(() => {
+          setCurrentUser({
+            username: "",
+            firstName: "",
+            lastName: "",
+            email: "",
+            avatar: "",
+            role: "",
+          });
+          history.push("/");
         });
-        history.push("/");
-      });
-    }, 2000);
+      }, 2000);
+    });
   }
 
   useEffect(() => {
