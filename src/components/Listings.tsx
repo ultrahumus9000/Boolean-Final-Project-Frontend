@@ -15,6 +15,7 @@ export default function Listings() {
     })
       .then((res) => res.json())
       .then((houses) => {
+        console.log("i am listing");
         setHousesForHost(houses);
       });
   }, []);
