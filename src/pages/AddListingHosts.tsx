@@ -3,11 +3,10 @@ import Facility from "../components/Facility";
 import { useHistory } from "react-router";
 import useStore from "../store";
 
-export default function AddListingHosts() {
+export default function AddListingHost() {
   const currentUser = useStore((state) => state.currentUser);
   const addNewListing = useStore((state) => state.addNewListing);
   console.log("current", currentUser);
-  //hhhhh
   const initialHouseData = {
     name: "",
     city: "",
@@ -19,20 +18,18 @@ export default function AddListingHosts() {
   };
 
   const facilitiesList = {
-    bedroom: "Bedroom",
-    maxGuests: "MaxGuests",
-    balcony: "Balcony",
-    bathtub: "Bathtub",
-    bidet: "Bidet",
-    garden: "Garden",
-    jacuzzi: "Jacuzzi",
-    kitchen: "Kitchen",
-    parking: "Parking",
-    shower: "Shower",
-    spa: "Spa",
-    swimmingPool: "SwimmingPool",
-    tv: "TV",
-    wifi: "WiFi",
+    Balcony: "Balcony",
+    Bathtub: "Bathtub",
+    Bidet: "Bidet",
+    Garden: "Garden",
+    Jacuzzi: "Jacuzzi",
+    Kitchen: "Kitchen",
+    Parking: "Parking",
+    Shower: "Shower",
+    Spa: "Spa",
+    SwimmingPool: "SwimmingPool",
+    TV: "TV",
+    Wifi: "WiFi",
   };
 
   const [picturesArray, setPicturesArray] = useState([]);
@@ -66,12 +63,16 @@ export default function AddListingHosts() {
     setNewListing({ ...newListing, pictures: [...uploadedFiles] });
     setPicturesArray([...uploadedFiles]);
 
-    // console.log("setPicturesArray", [...uploadedFiles]);
+    console.log("setPicturesArray", [...uploadedFiles]);
   }
 
   function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
     addNewListing(e, newListing);
+    // need to set this cuz the database react too slow so that you can see newest changes in your frontend
+    setTimeout(() => {
+      history.push("/host/dashboard");
+    }, 1500);
   }
 
   function cancel(e) {
@@ -161,7 +162,7 @@ export default function AddListingHosts() {
           />
         </label>
         {/* <span className="validity"></span> adds tick to validate?? */}
-        <input className="submitBtn" type="submit" value="Add listing" />
+        <input className="book-btn" type="submit" value="Add listing" />
         <a className="cancelLink" onClick={cancel}>
           Cancel Listing
         </a>

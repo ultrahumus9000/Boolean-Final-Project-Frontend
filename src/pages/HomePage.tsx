@@ -1,25 +1,26 @@
-import React, { SyntheticEvent, useEffect } from "react"
-import useStore from "../store"
-import Filter from "../components/Filter"
-import HouseCard from "../components/HouseCard"
+import React, { SyntheticEvent, useEffect } from "react";
+import useStore from "../store";
+import Filter from "../components/Filter";
+import HouseCard from "../components/HouseCard";
+import Profile from "./LoadingPage";
 
 export default function HomePage() {
-  const housesArray = useStore(store => store.houses)
-  const fetchAllHouses = useStore(store => store.fetchAllHouses)
+  const housesArray = useStore((store) => store.houses);
+  const fetchAllHouses = useStore((store) => store.fetchAllHouses);
 
   useEffect(() => {
-    fetchAllHouses()
-  }, [])
+    fetchAllHouses();
+  }, []);
 
   if (housesArray.length === 0) {
-    return <h1> we are loading for you </h1>
+    return <Profile />;
   }
-  console.log("housesArray in home", housesArray)
+  console.log("housesArray in home", housesArray);
   return (
     <div className="main">
       <Filter />
       <div className="houses-section">
-        {housesArray.map(house => (
+        {housesArray.map((house) => (
           <HouseCard
             key={house.id}
             image={house.pictures[0]}
@@ -31,5 +32,5 @@ export default function HomePage() {
         ))}
       </div>
     </div>
-  )
+  );
 }

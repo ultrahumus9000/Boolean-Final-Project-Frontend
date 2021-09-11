@@ -62,6 +62,7 @@ p {
   border-radius: 30px;
   padding: 8px 15px;
   border: none;
+  font-size: 1.2rem;
 }
 
 .App {
@@ -96,25 +97,96 @@ p {
   overflow: scroll;
   padding: 20px;
 }
+
+.wrapper {
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+  grid-auto-rows: 200px;
+  grid-template-areas:
+    ". a ."
+    ". a .";
+}
+.loader {
+  grid-area: a;
+  align-self: center;
+  justify-self: center;
+}
+
+.spinner {
+  width: 100%;
+  transition: 0.2s;
+  animation: mymove 1s infinite;
+}
+@keyframes mymove {
+  50% {
+    transform: rotate(180deg);
+  }
+}
+
+.doorHanger {
+  opacity: 10%;
+  width: 100%;
+  margin-bottom: 20px;
+  animation: swing 0.3s infinite;
+}
+@keyframes swing {
+  50% {
+    transform: rotate(30deg);
+  }
+}
+
+/* NAV */
+
 .nav {
-  background-color: pink;
-  border-bottom: 1px solid var(--body-text);
+  /* background-color: white; */
+  border-bottom: 1px solid #d67632;
   color: var(--orange-hl);
   display: flex;
   justify-content: space-between;
   padding: 10px;
 }
 
-.bottom-nav {
-  background: pink;
+.logBtn {
+  border-radius: 30px;
+  padding: 8px 15px;
+  width: 100%;
+  background-color: #d67632;
+  color: #eff0f3;
+  border: none;
+  font-size: 0.8rem;
+  transition: 0.2s;
+}
+.logBtn:hover {
+  filter: brightness(1.2);
+  transform: scale(1.01);
+}
+
+.bottom-nav-guest {
+  background: #ff8e3c;
   height: 50px;
   display: grid;
   grid-template-columns: 30% 30% 30%;
   justify-content: space-between;
   place-items: center;
+  padding: 0 15px;
+}
+
+.bottom-nav {
+  background: #ff8e3c;
+  height: 50px;
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: space-between;
+  place-items: center;
 }
 
 .bottom-nav img {
+  width: 30px;
+}
+
+.bottom-nav-guest img {
   width: 30px;
 }
 
@@ -124,11 +196,47 @@ p {
 
 /* HOMEPAGE  */
 .filter {
+  background-color: rgb(255, 255, 255);
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  border-bottom: 1px solid var(--body-text);
-  margin: 10px 0;
+  grid-template-columns: 100%;
+  /* grid-template-rows: 1fr; */
+  padding: 10px;
+  gap: 10px;
+  /* border-bottom: 1px solid var(--body-text); */
+  margin: 10px 0 20px 0;
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 3px 5px;
+}
+
+.filter input:hover {
+  box-shadow: 0 0 0 1px #d9376e;
+}
+
+.filter label {
+  font-size: 1rem;
+  display: flex;
+  place-items: center;
+}
+
+.filter .searchfield {
+  /* flex: 1; */
+  width: 75%;
+  border: 0px;
+  border-radius: 30px;
+  padding: 8px 11px;
+  margin-left: 10px;
+  background-color: #f6f6f6;
+}
+
+.filter .numfield,
+.filter .datefield {
+  /* flex: 1; */
+  background-color: #f6f6f6;
+  border: 0px;
+  border-radius: 30px;
+  padding: 8px 11px;
+  margin-left: 10px;
+  width: 75%;
 }
 
 .houses-section {
@@ -138,6 +246,7 @@ p {
 }
 
 .house-card {
+  background-color: rgba(255, 255, 255, 0.8);
   min-height: 220px;
   border-radius: 10px;
   box-shadow: rgba(0, 0, 0, 0.07) 0px 3px 5px;
@@ -147,7 +256,8 @@ p {
   background-color: var(--grey);
 }
 .house-card:hover {
-  border: 1px solid var(--orange-hl);
+  background-color: white;
+  box-shadow: 0 0 0 1px #d9376e;
 }
 
 .cardImage {
@@ -212,10 +322,18 @@ p {
 .stay-container {
   display: grid;
   grid-template-columns: 30% 70%;
+  margin: 10px 0px;
+
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 3px 5px;
+  padding: 10px;
+  /* display: grid;
+  grid-template-columns: 30% 70%;
   border: 1px black solid;
   border-radius: 5px;
   padding: 5px;
-  margin: 10px 0px;
+  margin: 10px 0px; */
 }
 
 .stay-container img {
@@ -311,6 +429,10 @@ p {
 }
 
 /* house-listing-page */
+.house-listing-page {
+  display: grid;
+  gap: 10px;
+}
 
 .pictures-section {
   display: grid;
@@ -328,7 +450,7 @@ p {
   font-size: 1.2rem;
 }
 .swiper {
-  width: 330px;
+  width: 344px;
   height: 300px;
 }
 .host-profile {
@@ -339,7 +461,7 @@ p {
   border: 2px solid teal;
 }
 .pictures-section img {
-  width: 320px;
+  width: 344px;
   height: 100%;
   object-fit: cover;
 }
@@ -397,12 +519,13 @@ p {
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-weight: bold;
 }
+
 .book-btn {
+  border-radius: 30px;
+  padding: 8px 15px;
   width: 100%;
-  background-color: slateblue;
+  background-color: #d9376e;
   color: #eff0f3;
-  border-radius: 2px;
-  padding: 5px 20px;
   border: none;
   font-size: 1.2rem;
   transition: 0.2s;
@@ -415,10 +538,13 @@ p {
 
 .review-section .single-review {
   display: grid;
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr 130px;
+  gap: 20px;
   align-items: center;
-  border: 2px solid var(--grey);
+  border-bottom: 1px solid var(--grey);
+  padding: 10px 0;
 }
+
 .guest-div {
   display: grid;
   grid-template-columns: 40px 1fr;
@@ -438,6 +564,11 @@ p {
   font-size: 16px;
 }
 
+.review-form {
+  background-color: #fffffe;
+  padding: 10px;
+}
+
 /* booking form */
 .booking-form {
   background-color: lavender;
@@ -447,15 +578,31 @@ p {
   display: grid;
 }
 
+p.voyage {
+  height: 150px;
+  width: 250px;
+  color: aliceblue;
+  font-family: fantasy;
+  font-size: 3rem;
+  font-weight: bolder;
+  display: grid;
+  place-items: center;
+  background-image: url("https://wallpaperaccess.com/thumb/4817951.jpg");
+  background-size: cover;
+  animation-name: jojo;
+  animation-duration: 600ms;
+}
 /* HOST DASHBOARD */
 
 .listing-container {
   display: grid;
   grid-template-columns: 30% 70%;
-  border: 1px black solid;
-  border-radius: 5px;
-  padding: 5px;
   margin: 10px 0px;
+
+  background-color: rgba(255, 255, 255, 0.8);
+  border-radius: 10px;
+  box-shadow: rgba(0, 0, 0, 0.07) 0px 3px 5px;
+  padding: 10px;
 }
 .house-img {
   height: 80px;
@@ -571,6 +718,7 @@ input[type="checkbox"] + label {
 input[type="checkbox"]:hover + label {
   background-color: #d9376e;
   color: #eff0f3;
+  /* transform: scale(1.01); */
 }
 input[type="checkbox"]:checked + label {
   background-color: #ff8e3c;
@@ -602,6 +750,22 @@ input[type="file"] {
   display: inline;
 }
 
+.editform-ul-img {
+  display: grid;
+  grid-template-columns: repeat(3, 100px);
+  gap: 10px;
+
+  place-items: center;
+  margin-left: -20px;
+}
+.editform-img {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border: 1px solid black;
+  border-radius: 10px;
+}
+
 /* RESPONSIVE MEDIA QUERIES */
 
 @media screen and (max-width: 416px) {
@@ -610,6 +774,17 @@ input[type="file"] {
   }
 }
 
+@keyframes jojo {
+  from {
+    transform: scale(70%);
+  }
+  50% {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(70%);
+  }
+}
 /* :root {
   --orange-hl: #ff8e3c;
   --orange-ll: #d67632;

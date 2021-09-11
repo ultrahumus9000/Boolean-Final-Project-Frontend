@@ -14,10 +14,38 @@ export default function Dashboard() {
   const toggleBooking = useStore((store) => store.toggleBooking);
   const setToggleBooking = useStore((store) => store.setToggleBooking);
   const currentUser = useStore((state) => state.currentUser);
+  const setCurrentUser = useStore((store) => store.setCurrentUser);
   const history = useHistory();
+
+  console.log(currentUser);
 
   function addListingPage() {
     history.push("/host/dashboard/addlisting");
+  }
+
+  function deleteAccount() {
+    // delete the account completely for now which i shouldnt
+    fetch(`http://localhost:4000/users`, {
+      method: "DELETE",
+      credentials: "include",
+    }).then(() => {
+      alert("you are successfully deleted");
+      setTimeout(() => {
+        fetch("http://localhost:4000/logout", {
+          credentials: "include",
+        }).then(() => {
+          setCurrentUser({
+            username: "",
+            firstName: "",
+            lastName: "",
+            email: "",
+            avatar: "",
+            role: "",
+          });
+          history.push("/");
+        });
+      }, 2000);
+    });
   }
 
   useEffect(() => {
@@ -39,9 +67,17 @@ export default function Dashboard() {
       <div className="profile">
         <img className="profile-avatar" src={currentUser.avatar} alt="avatar" />
         <h1>Hello {currentUser.username}!</h1>
-
+        <button
+          className="clearBtn"
+          onClick={() => {
+            deleteAccount();
+          }}
+        >
+          {" "}
+          Delete Account
+        </button>
         {currentUser.role === "host" && (
-          <button onClick={addListingPage} className="go-profile">
+          <button onClick={addListingPage} className="book-btn">
             Add a listing
           </button>
         )}
