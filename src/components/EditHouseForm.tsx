@@ -2,6 +2,7 @@ import React, { useState, useEffect, SyntheticEvent } from "react";
 import Facility from "../components/Facility";
 import { useHistory } from "react-router";
 import useStore from "../store";
+import { useFormControl } from "@material-ui/core";
 
 export default function EditHouseForm() {
   const toggleDisplayHouseEdit = useStore(
@@ -26,15 +27,13 @@ export default function EditHouseForm() {
   const house = useStore((store) => store.house);
   const fetchOneHouse = useStore((store) => store.fetchOneHouse);
   const [houseForm, setHouseForm] = useState(house);
+  const [newPicCount, setnewPicCount] = useState(0);
   const history = useHistory();
 
-  // console.log("line 31", houseForm);
-
   function handleChange(e) {
-    console.log("handlechange", e.target.value);
     setHouseForm({
       ...houseForm,
-      [e.target.name]: e.target.value.toString(),
+      [e.target.name]: e.target.value,
     });
   }
 
@@ -47,7 +46,24 @@ export default function EditHouseForm() {
     setHouseForm({ ...houseForm, [e.target.name]: updatedArray });
   }
 
-  function addPicture() {}
+  function addPicture(e: SyntheticEvent) {
+    const targetEvent = e.target as HTMLInputElement;
+    if (targetEvent.value === "") {
+      return;
+    }
+    const newPicture = {
+      id: newPicCount,
+      src: targetEvent.value,
+      alt: "any",
+    };
+
+    setHouseForm({
+      ...houseForm,
+      pictures: [...houseForm.pictures, newPicture],
+    });
+    setnewPicCount(newPicCount - 1);
+    targetEvent.value = "";
+  }
 
   function deletePicture(id: number) {
     // picture deleted in the state first, if cancel it we have to put it back
@@ -66,6 +82,9 @@ export default function EditHouseForm() {
   function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
 
+    // 1 delete the pictures does not exist in the house
+    //2 create more pictures that is new
+    // update the model
     fetch("", {}).then(() => {});
   }
 
@@ -101,18 +120,11 @@ export default function EditHouseForm() {
         <label htmlFor="file-upload" className="custom-file-upload">
           Add Photos
           <input
-            id="file-upload"
-            name="pictureSrc"
+            id="src-add"
+            name="src"
             type="text"
-            onChange={() => {}}
+            onInput={addPicture}
             placeholder="picture source"
-          />
-          <input
-            id="file-upload"
-            name="pictureAlt"
-            type="text"
-            onChange={() => {}}
-            placeholder="description"
           />
         </label>
         <ul className="editform-ul-img">
@@ -121,12 +133,12 @@ export default function EditHouseForm() {
               <div>
                 <img className="editform-img" src={picture.src} />
                 <button
+                  type="button"
                   onClick={() => {
                     deletePicture(picture.id);
                   }}
                 >
-                  {" "}
-                  delete{" "}
+                  delete
                 </button>
               </div>
             );
@@ -172,7 +184,6 @@ export default function EditHouseForm() {
                 <li key={facility} className="cboxLi">
                   <input
                     className="hidden"
-                    onChange={handleChangeFacility}
                     type="checkbox"
                     name="facility"
                     value={facility}
@@ -180,6 +191,7 @@ export default function EditHouseForm() {
                       houseForm.facility.includes(facility) ? true : false
                     }
                     id={facility}
+                    onChange={handleChangeFacility}
                   />
                   <label htmlFor={facility}>{facilitiesList[facility]}</label>
                 </li>
