@@ -96,9 +96,10 @@ export default function EditHouseForm() {
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(houseForm),
     }).then(() => {
-      toggleDisplayHouseEdit();
-      toggleUpdateHouseStatus();
-      targetEvent.reset();
+      // toggleUpdateHouseStatus();
+      setTimeout(() => {
+        toggleDisplayHouseEdit();
+      }, 2000);
     });
   }
 
