@@ -131,7 +131,7 @@ const useStore = create<Store>((set, get) => ({
   },
   updateHouseStatus: false,
   toggleUpdateHouseStatus: () => {
-    set({ waiting: !get().updateHouseStatus });
+    set({ updateHouseStatus: !get().updateHouseStatus });
   },
   bookingDisplay: false,
   toggleBooking: "future",

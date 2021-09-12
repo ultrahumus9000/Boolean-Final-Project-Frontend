@@ -33,7 +33,6 @@ export default function EditHouseForm() {
 
   function handleChange(e: SyntheticEvent) {
     const targetEvent = e.target as HTMLInputElement;
-    console.log("i am changing");
     setHouseForm({
       ...houseForm,
       [targetEvent.name]: targetEvent.value,
@@ -96,10 +95,8 @@ export default function EditHouseForm() {
       headers: { "Content-type": "application/json" },
       body: JSON.stringify(houseForm),
     }).then(() => {
-      // toggleUpdateHouseStatus();
-      setTimeout(() => {
-        toggleDisplayHouseEdit();
-      }, 2000);
+      toggleUpdateHouseStatus();
+      toggleDisplayHouseEdit();
     });
   }
 
