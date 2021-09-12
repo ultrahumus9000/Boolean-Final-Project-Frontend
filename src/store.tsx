@@ -81,6 +81,8 @@ type Store = {
   toggleDisplayHouseEdit: () => void;
   waiting: boolean;
   toggleWaiting: () => void;
+  updateHouseStatus: boolean;
+  toggleUpdateHouseStatus: () => void;
   setToggleBooking: (arg: string) => void;
   toggleDisplay: () => void;
   setCurrentUser: (arg: User) => void;
@@ -126,6 +128,10 @@ const useStore = create<Store>((set, get) => ({
   waiting: false,
   toggleWaiting: () => {
     set({ waiting: !get().waiting });
+  },
+  updateHouseStatus: false,
+  toggleUpdateHouseStatus: () => {
+    set({ waiting: !get().updateHouseStatus });
   },
   bookingDisplay: false,
   toggleBooking: "future",
@@ -201,7 +207,7 @@ const useStore = create<Store>((set, get) => ({
       });
   },
   getValidateCurrToken: () => {
-    fetch("http://localhost:4000/token", {
+    fetch(`${baseUrl}/token`, {
       credentials: "include",
     })
       .then((resp) => resp.json())
@@ -211,7 +217,7 @@ const useStore = create<Store>((set, get) => ({
   },
 
   getBookingsForHost: () => {
-    fetch("http://localhost:4000/bookings/host", {
+    fetch(`${baseUrl}/bookings/host`, {
       credentials: "include",
     })
       .then((resp) => resp.json())
@@ -223,7 +229,7 @@ const useStore = create<Store>((set, get) => ({
       });
   },
   getBookingsForGuest: () => {
-    fetch("http://localhost:4000/bookings/guest", {
+    fetch(`${baseUrl}/bookings/guest`, {
       credentials: "include",
     })
       .then((resp) => resp.json())
@@ -241,7 +247,6 @@ const useStore = create<Store>((set, get) => ({
       credentials: "include",
     })
       .then(() => {
-        console.log("i am deleting");
         const allBookings = get().bookings;
         const filteredBookings = allBookings.filter(
           (booking) => booking.bookingId !== id

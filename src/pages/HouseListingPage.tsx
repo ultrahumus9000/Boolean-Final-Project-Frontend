@@ -23,6 +23,7 @@ import SingleReview from "../components/Review";
 import HouseBasicInfo from "../components/HouseBasicInfo";
 import BookingForm from "../components/BookingForm";
 import EditHouseForm from "../components/EditHouseForm";
+import Loading from "./LoadingPage";
 
 type HouseIdType = {
   houseId: string;
@@ -53,13 +54,14 @@ export default function HouseListingPage() {
   const bookingDisplay = useStore((store) => store.bookingDisplay);
   const toggleBookingDisplay = useStore((store) => store.toggleDisplay);
   const displayEditHouse = useStore((store) => store.displayHouseEdit);
-
+  const updateHouseStatus = useStore((store) => store.updateHouseStatus);
   useEffect(() => {
+    console.log("i am changing for update");
     fetchOneHouse(realHouseId);
-  }, [realHouseId]);
+  }, [realHouseId, updateHouseStatus]);
 
   if (Object.keys(house).length === 0) {
-    return <h1>we are loading for you</h1>;
+    return <Loading />;
   }
 
   function bookAction() {

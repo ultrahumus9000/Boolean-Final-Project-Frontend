@@ -12,10 +12,6 @@ export default function HomePage() {
     fetchAllHouses();
   }, []);
 
-  if (housesArray.length === 0) {
-    return <Profile />;
-  }
-  console.log("housesArray in home", housesArray);
   return (
     <div className="main">
       <Filter />

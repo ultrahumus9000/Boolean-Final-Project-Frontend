@@ -25,15 +25,18 @@ export default function EditHouseForm() {
   };
 
   const house = useStore((store) => store.house);
-  const fetchOneHouse = useStore((store) => store.fetchOneHouse);
   const [houseForm, setHouseForm] = useState(house);
   const [newPicCount, setnewPicCount] = useState(0);
-  const history = useHistory();
+  const toggleUpdateHouseStatus = useStore(
+    (store) => store.toggleUpdateHouseStatus
+  );
 
-  function handleChange(e) {
+  function handleChange(e: SyntheticEvent) {
+    const targetEvent = e.target as HTMLInputElement;
+    console.log("i am changing");
     setHouseForm({
       ...houseForm,
-      [e.target.name]: e.target.value,
+      [targetEvent.name]: targetEvent.value,
     });
   }
 
@@ -81,18 +84,29 @@ export default function EditHouseForm() {
 
   function handleSubmit(e: SyntheticEvent) {
     e.preventDefault();
+    const targetEvent = e.target as HTMLFormElement;
 
     // 1 delete the pictures does not exist in the house
     //2 create more pictures that is new
     // update the model
-    fetch("", {}).then(() => {});
+    const houseId = house.id;
+    fetch(`http://localhost:4000/houses/${houseId}`, {
+      method: "PATCH",
+      credentials: "include",
+      headers: { "Content-type": "application/json" },
+      body: JSON.stringify(houseForm),
+    }).then(() => {
+      toggleDisplayHouseEdit();
+      toggleUpdateHouseStatus();
+      targetEvent.reset();
+    });
   }
 
   function cancel(e) {
     setHouseForm(house);
     toggleDisplayHouseEdit();
   }
-
+  // console.log("houseform", houseForm);
   return (
     <div>
       <h2>House Infomation</h2>
@@ -103,7 +117,7 @@ export default function EditHouseForm() {
             className="textfield"
             name="name"
             type="text"
-            value={house.name}
+            value={houseForm.name}
             onChange={handleChange}
           />
         </label>
@@ -113,7 +127,7 @@ export default function EditHouseForm() {
             className="textfield"
             name="city"
             type="text"
-            value={house.city}
+            value={houseForm.city}
             onChange={handleChange}
           />
         </label>
