@@ -432,6 +432,7 @@ p {
 .house-listing-page {
   display: grid;
   gap: 10px;
+  justify-content: center;
 }
 
 .pictures-section {
