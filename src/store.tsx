@@ -1,7 +1,7 @@
 import { SyntheticEvent } from "react";
 import create from "zustand";
 
-let baseUrl = "http://localhost:4000";
+let baseUrl = "https://hotelable.herokuapp.com";
 
 type User = {
   username: string;

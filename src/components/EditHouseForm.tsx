@@ -89,7 +89,7 @@ export default function EditHouseForm() {
     //2 create more pictures that is new
     // update the model
     const houseId = house.id;
-    fetch(`http://localhost:4000/houses/${houseId}`, {
+    fetch(`https://hotelable.herokuapp.com/houses/${houseId}`, {
       method: "PATCH",
       credentials: "include",
       headers: { "Content-type": "application/json" },

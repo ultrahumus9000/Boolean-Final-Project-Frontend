@@ -53,7 +53,7 @@ export default function RegisterPage() {
       }
     }
     console.log(loginData);
-    fetch("http://localhost:4000/users", {
+    fetch("https://hotelable.herokuapp.com/users", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

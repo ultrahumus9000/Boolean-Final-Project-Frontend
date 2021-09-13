@@ -27,7 +27,7 @@ export default function BookingForm({ house }) {
   const shortDate = today.substring(0, 10);
 
   function createBooking(booking) {
-    fetch(`http://localhost:4000/bookings`, {
+    fetch(`https://hotelable.herokuapp.com/bookings`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

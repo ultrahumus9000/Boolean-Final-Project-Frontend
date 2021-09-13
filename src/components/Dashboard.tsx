@@ -25,13 +25,13 @@ export default function Dashboard() {
 
   function deleteAccount() {
     // delete the account completely for now which i shouldnt
-    fetch(`http://localhost:4000/users`, {
+    fetch(`https://hotelable.herokuapp.com/users`, {
       method: "DELETE",
       credentials: "include",
     }).then(() => {
       alert("you are successfully deleted");
       setTimeout(() => {
-        fetch("http://localhost:4000/logout", {
+        fetch("https://hotelable.herokuapp.com/logout", {
           credentials: "include",
         }).then(() => {
           setCurrentUser({

@@ -11,7 +11,7 @@ export default function Listings() {
   const history = useHistory();
 
   useEffect(() => {
-    fetch("http://localhost:4000/hosts/houses", {
+    fetch("https://hotelable.herokuapp.com/hosts/houses", {
       credentials: "include",
     })
       .then((res) => res.json())
@@ -22,7 +22,7 @@ export default function Listings() {
 
   const deleteHouse = (id) => {
     console.log("houseid", id);
-    fetch(`http://localhost:4000/houses/${id}`, {
+    fetch(`https://hotelable.herokuapp.com/houses/${id}`, {
       method: "DELETE",
       credentials: "include",
     })

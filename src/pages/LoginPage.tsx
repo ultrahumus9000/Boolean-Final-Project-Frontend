@@ -12,7 +12,7 @@ export default function LoginPage() {
   const currentUser = useStore((store) => store.currentUser);
 
   function loginUser(userCreds) {
-    fetch("http://localhost:4000/login", {
+    fetch("https://hotelable.herokuapp.com/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
