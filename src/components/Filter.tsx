@@ -21,8 +21,6 @@ export default function Filter() {
   function handleSubmit(e) {
     e.preventDefault();
     filterHouses(filterOptions);
-    console.log("submit clicked", filterOptions);
-    console.log("i submit");
   }
 
   function handleChange(e) {

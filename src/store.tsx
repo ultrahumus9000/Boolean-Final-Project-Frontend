@@ -180,8 +180,12 @@ const useStore = create<Store>((set, get) => ({
     )
       .then((resp) => resp.json())
       .then((allHouses) => {
-        set({ houses: allHouses });
-        console.log("All houses fetch", allHouses);
+        if (allHouses.length === 0) {
+          alert("we dont have the house you look for");
+        } else {
+          set({ houses: allHouses });
+          console.log("All houses fetch", allHouses);
+        }
       })
       .catch((error) => {
         throw error;

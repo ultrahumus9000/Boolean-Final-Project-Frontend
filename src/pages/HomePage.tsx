@@ -3,6 +3,7 @@ import useStore from "../store";
 import Filter from "../components/Filter";
 import HouseCard from "../components/HouseCard";
 import Profile from "./LoadingPage";
+import Loading from "./LoadingPage";
 
 export default function HomePage() {
   const housesArray = useStore((store) => store.houses);
@@ -12,6 +13,9 @@ export default function HomePage() {
     fetchAllHouses();
   }, []);
 
+  if (housesArray.length === 0) {
+    return <Loading />;
+  }
   return (
     <div className="main">
       <Filter />
