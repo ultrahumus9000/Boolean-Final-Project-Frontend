@@ -19,9 +19,9 @@ function App() {
   const currentUser = useStore((store) => store.currentUser);
   const getValidateCurrToken = useStore((store) => store.getValidateCurrToken);
 
-  useEffect(() => {
-    getValidateCurrToken();
-  }, []);
+  // useEffect(() => {
+  //   getValidateCurrToken();
+  // }, []);
 
   return (
     <div className="App">
