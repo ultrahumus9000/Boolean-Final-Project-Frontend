@@ -217,6 +217,9 @@ const useStore = create<Store>((set, get) => ({
       .then((resp) => resp.json())
       .then((userToken) => {
         set({ currentUser: userToken });
+      })
+      .catch((error) => {
+        console.error("doesnt have token", error);
       });
   },
 
